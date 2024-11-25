@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Sidebar from './components/SideBar';
+import Sidebar from './components/Sidebar';
 import IssuesList from './components/IssuesList';
 import Favorites from './components/Favorites';
 import './index.css';
