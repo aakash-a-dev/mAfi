@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Sidebar from './components/Sidebar'; 
 import IssuesList from './components/IssuesList';
@@ -6,6 +6,11 @@ import Favorites from './components/Favorites';
 import './index.css';
 import AnnouncementBar from './components/AnnouncementBar';
 
+// Google Analytics
+import { initializeGA, logPageView } from "./analytics";
+import { useEffect } from 'react';
+
+  
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -16,6 +21,10 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  useEffect(() => {
+    initializeGA();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
@@ -37,5 +46,17 @@ function App() {
     </QueryClientProvider>
   );
 }
+
+
+// Don't touch this part it is for google analytics
+const PageTracker = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    logPageView(location.pathname);
+  }, [location]);
+
+  return null;
+};
 
 export default App;
