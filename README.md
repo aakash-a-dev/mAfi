@@ -1,50 +1,111 @@
-# React + TypeScript + Vite
+# mAfi (Me And First Issue)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
+  <img src="https://lucide.dev/icons/rocket" alt="mAfi Logo" width="120" />
+  <h3>Find Your First Open Source Contribution</h3>
+  <p>A modern platform to discover and track "good first issues" in open source projects.</p>
+</div>
 
-Currently, two official plugins are available:
+## 🚀 About mAfi
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+mAfi (Me And First Issue) is a web application designed to help developers find their first open source contributions. It aggregates "good first issues" from GitHub repositories, making it easier for newcomers to start their open source journey.
 
-## Expanding the ESLint configuration
+### Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- 🔍 Browse through curated "good first issues"
+- ⭐ Save favorite issues for later
+- 🏷️ Filter issues by labels and difficulty
+- 🎯 Real-time GitHub integration
+- 📱 Responsive design for all devices
 
-- Configure the top-level `parserOptions` property like this:
+## 🛠️ Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- React 18
+- TypeScript
+- Vite
+- TailwindCSS
+- React Query
+- React Router
+- GitHub API
+- Lucide Icons
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+- Git
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/mafi.git
+cd mafi
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
 ```
+
+3. Create a `.env` file in the root directory:
+```env
+GITHUB_TOKEN=your_github_token_here
+```
+
+4. Start the development server:
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+The application will be available at `http://localhost:5173`
+
+## 🤝 Contributing
+
+We welcome contributions from everyone! Here's how you can help:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### Development Guidelines
+
+- Follow the existing code style and conventions
+- Write meaningful commit messages
+- Update documentation as needed
+- Add comments for complex logic
+- Test your changes thoroughly
+
+## 📝 Code of Conduct
+
+Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing to the project.
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Thanks to all contributors who help improve mAfi
+- GitHub API for making this possible
+- The open source community for inspiration
+
+## 🔗 Links
+
+- [Report a Bug](https://github.com/yourusername/mafi/issues)
+- [Request a Feature](https://github.com/yourusername/mafi/issues)
+- [Project Roadmap](https://github.com/yourusername/mafi/projects)
+
+---
+
+<div align="center">
+  Made with ❤️ for the open source community
+</div>
