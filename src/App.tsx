@@ -35,6 +35,7 @@ function App() {
           <main className="flex-1 p-4 md:p-8 overflow-y-auto h-screen">
             <div className="max-w-7xl mx-auto">
               <Routes>
+                <PageTracker />
                 <Route path="/" element={<IssuesList />} />
                 <Route path="/favorites" element={<Favorites />} />
               </Routes>
