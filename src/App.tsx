@@ -28,6 +28,10 @@ function App() {
     labels: [],
   });
 
+  useEffect(() => {
+    initializeGA();
+  }, []);
+  
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
@@ -37,6 +41,7 @@ function App() {
             <Sidebar />
           <div className="flex-1 p-4 md:p-8">
             <div className="max-w-7xl mx-auto space-y-6">
+            <PageTracker />
               <FilterBar onFiltersChange={setFilters} />
               <div className="pb-16 md:pb-8">
                 <Routes>
