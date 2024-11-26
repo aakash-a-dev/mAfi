@@ -1,10 +1,9 @@
 const labels = [
-  { value: "", label: "All labels" },
+  { value: "good first issue", label: "Good First Issue" },
   { value: "bug", label: "Bug" },
   { value: "documentation", label: "Documentation" },
   { value: "duplicate", label: "Duplicate" },
   { value: "enhancement", label: "Enhancement" },
-  { value: "good first issue", label: "Good First Issue" },
   { value: "help wanted", label: "Help Wanted" },
   { value: "invalid", label: "Invalid" },
   { value: "question", label: "Question" },
