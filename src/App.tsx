@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Sidebar from './components/Sidebar';
 import IssuesList from './components/IssuesList';
 import Favorites from './components/Favorites';
@@ -10,6 +10,7 @@ import './index.css';
 
 // Google Analytics
 import { initializeGA, logPageView } from "./analytics";
+import FilterBar, { Filters } from './components/FilterBar';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,27 +22,30 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  useEffect(() => {
-    initializeGA();
-  }, []);
+  const [filters, setFilters] = useState<Filters>({
+    languages: [],
+    difficulty: [],
+    labels: [],
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <PageTracker />
         <div className="flex flex-col min-h-screen bg-[#121212] text-white">
           <AnnouncementBar />
           <div className="flex flex-1">
             <Sidebar />
-            {/* Add pb-16 for mobile to account for the nav bar */}
-            <main className="flex-1 p-4 md:p-8 overflow-y-auto pb-24 md:pb-8">
-              <div className="max-w-7xl mx-auto">
+          <div className="flex-1 p-4 md:p-8">
+            <div className="max-w-7xl mx-auto space-y-6">
+              <FilterBar onFiltersChange={setFilters} />
+              <div className="pb-16 md:pb-8">
                 <Routes>
-                  <Route path="/" element={<IssuesList />} />
+                  <Route path="/" element={<IssuesList filters={filters} />} />
                   <Route path="/favorites" element={<Favorites />} />
                 </Routes>
               </div>
-            </main>
+            </div>
+          </div>
           </div>
           <MobileNav />
         </div>

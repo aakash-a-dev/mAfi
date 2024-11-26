@@ -4,15 +4,20 @@ import { Search, Loader } from 'lucide-react';
 import { GitHubIssue } from '../types';
 import IssueCard from './IssueCard';
 import Pagination from './Pagination';
+import { Filters } from './FilterBar';
 
 interface GitHubSearchResponse {
   items: GitHubIssue[];
   total_count: number;
 }
 
+interface IssuesListProps {
+  filters: Filters;
+}
+
 const ITEMS_PER_PAGE = 12;
 
-function IssuesList() {
+function IssuesList({ filters }: IssuesListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -34,10 +39,43 @@ function IssuesList() {
     },
   });
 
-  const filteredIssues = data?.items?.filter((issue) =>
-    issue.title.toLowerCase().includes(searchQuery.toLowerCase())
-  ) ?? [];
+  const filterIssues = (issues: GitHubIssue[]) => {
+    return issues.filter((issue) => {
+      // Text search
+      const matchesSearch = issue.title
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
 
+      // Language filter
+      const matchesLanguage =
+        filters.languages.length === 0 ||
+        filters.languages.some((lang) =>
+          issue.body?.toLowerCase().includes(lang.toLowerCase())
+        );
+
+      // Difficulty filter
+      const matchesDifficulty =
+        filters.difficulty.length === 0 ||
+        filters.difficulty.some((diff) =>
+          issue.labels.some((label) =>
+            label.name.toLowerCase().includes(diff.toLowerCase())
+          )
+        );
+
+      // Tech stack filter
+      const matchesLabels =
+        filters.labels.length === 0 ||
+        filters.labels.some((tech) =>
+          issue.labels.some(
+            (label) => label.name.toLowerCase().includes(tech.toLowerCase())
+          )
+        );
+
+      return matchesSearch && matchesLanguage && matchesDifficulty && matchesLabels;
+    });
+  };
+
+  const filteredIssues = data?.items ? filterIssues(data.items) : [];
   const totalPages = Math.ceil((data?.total_count ?? 0) / ITEMS_PER_PAGE);
 
   if (error) {
@@ -58,9 +96,9 @@ function IssuesList() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl md:text-3xl font-bold">Good First Issues</h1>
-        <div className="relative w-full sm:w-96">
+      <div className="flex flex-col md:flex-row md:items-center gap-4">
+        <h1 className="text-2xl md:text-3xl font-bold whitespace-nowrap">Good First Issues</h1>
+        <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
@@ -76,7 +114,7 @@ function IssuesList() {
         <p className="text-gray-400 text-center py-8">No issues found.</p>
       ) : (
         <>
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 auto-rows-fr">
             {filteredIssues.map((issue) => (
               <IssueCard key={issue.id} issue={issue} />
             ))}
