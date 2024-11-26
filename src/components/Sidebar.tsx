@@ -5,7 +5,7 @@ export default function Sidebar() {
   const location = useLocation();
 
   return (
-    <div className="w-64 min-w-64 bg-black p-6 h-screen sticky top-0 overflow-y-auto">
+    <div className="hidden md:block w-64 min-w-64 bg-black p-6 h-screen sticky top-0 overflow-y-auto">
       <div className="flex items-center space-x-2 mb-8">
         <Github className="w-8 h-8 text-white" />
         <h1 className="text-xl font-bold">mAfi</h1>

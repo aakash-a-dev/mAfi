@@ -58,9 +58,9 @@ function IssuesList() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center gap-4">
-        <h1 className="text-2xl md:text-3xl font-bold whitespace-nowrap">Good First Issues</h1>
-        <div className="relative flex-1 max-w-md">
+      <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-2xl md:text-3xl font-bold">Good First Issues</h1>
+        <div className="relative w-full sm:w-96">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
@@ -76,7 +76,7 @@ function IssuesList() {
         <p className="text-gray-400 text-center py-8">No issues found.</p>
       ) : (
         <>
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 auto-rows-fr">
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
             {filteredIssues.map((issue) => (
               <IssueCard key={issue.id} issue={issue} />
             ))}
