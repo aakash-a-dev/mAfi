@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Search, Loader } from 'lucide-react';
-import { GitHubIssue } from '../types';
-import IssueCard from './IssueCard';
-import Pagination from './Pagination';
-import { Filters } from './FilterBar';
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Search, Loader } from "lucide-react";
+import { GitHubIssue } from "../types";
+import IssueCard from "./IssueCard";
+import Pagination from "./Pagination";
+import { Filters } from "./FilterBar";
+import { LabelSelector } from "./LabelSelector";
 
 interface GitHubSearchResponse {
   items: GitHubIssue[];
@@ -18,22 +19,29 @@ interface IssuesListProps {
 const ITEMS_PER_PAGE = 12;
 
 function IssuesList({ filters }: IssuesListProps) {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedLabel, setSelectedLabel] = useState("");
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedLabel]);
 
   const { data, isLoading, error } = useQuery<GitHubSearchResponse>({
-    queryKey: ['issues', currentPage],
+    queryKey: ["issues", currentPage, selectedLabel],
     queryFn: async () => {
       const response = await fetch(
-        `https://api.github.com/search/issues?q=label:"good first issue"+is:open&sort=created&order=desc&per_page=${ITEMS_PER_PAGE}&page=${currentPage}`,
+        `https://api.github.com/search/issues?q=is:open${
+          selectedLabel ? `+label:"${selectedLabel}"` : ""
+        }&sort=created&order=desc&per_page=${ITEMS_PER_PAGE}&page=${currentPage}`,
         {
           headers: {
-            'Accept': 'application/vnd.github.v3+json'
-          }
+            Accept: "application/vnd.github.v3+json",
+          },
         }
       );
       if (!response.ok) {
-        throw new Error('Failed to fetch issues');
+        throw new Error("Failed to fetch issues");
       }
       return response.json();
     },
@@ -41,19 +49,16 @@ function IssuesList({ filters }: IssuesListProps) {
 
   const filterIssues = (issues: GitHubIssue[]) => {
     return issues.filter((issue) => {
-      // Text search
       const matchesSearch = issue.title
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
 
-      // Language filter
       const matchesLanguage =
         filters.languages.length === 0 ||
         filters.languages.some((lang) =>
           issue.body?.toLowerCase().includes(lang.toLowerCase())
         );
 
-      // Difficulty filter
       const matchesDifficulty =
         filters.difficulty.length === 0 ||
         filters.difficulty.some((diff) =>
@@ -62,16 +67,17 @@ function IssuesList({ filters }: IssuesListProps) {
           )
         );
 
-      // Tech stack filter
       const matchesLabels =
         filters.labels.length === 0 ||
         filters.labels.some((tech) =>
-          issue.labels.some(
-            (label) => label.name.toLowerCase().includes(tech.toLowerCase())
+          issue.labels.some((label) =>
+            label.name.toLowerCase().includes(tech.toLowerCase())
           )
         );
 
-      return matchesSearch && matchesLanguage && matchesDifficulty && matchesLabels;
+      return (
+        matchesSearch && matchesLanguage && matchesDifficulty && matchesLabels
+      );
     });
   };
 
@@ -97,7 +103,10 @@ function IssuesList({ filters }: IssuesListProps) {
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center gap-4">
-        <h1 className="text-2xl md:text-3xl font-bold whitespace-nowrap">Good First Issues</h1>
+        <LabelSelector
+          selectedLabel={selectedLabel}
+          setSelectedLabel={setSelectedLabel}
+        />
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
