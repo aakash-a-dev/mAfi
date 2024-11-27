@@ -110,7 +110,7 @@ export default function FilterBar({ onFiltersChange }: FilterBarProps) {
       {hasActiveFilters && (
         <div className="flex flex-wrap gap-2">
           {Object.entries(selectedFilters).map(([category, values]) =>
-            values.map((value: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined) => (
+            values.map((value: string | number | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined) => (
               <span
                 key={`${category}-${value}`}
                 className="flex items-center gap-1 px-2 py-1 text-sm bg-[#282828] rounded-full"
