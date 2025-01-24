@@ -2,7 +2,7 @@
 
 <div align="center">
   <img src="https://lucide.dev/icons/rocket" alt="mAfi Logo" width="120" />
-  <h3>Find Your First Open Source Contribution</h3>
+  <h3>Find Your First Open Source Contribution </h3>
   <p>A modern platform to discover and track "good first issues" in open source projects.</p>
 </div>
 
