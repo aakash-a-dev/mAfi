@@ -1,7 +1,9 @@
 # mAfi (Me And First Issue)
 
 <div align="center">
-  <img src="https://lucide.dev/icons/rocket" alt="mAfi Logo" width="120" />
+  <img src="https://github.com/user-attachments/assets/cb8306bc-22b8-4dc2-95fd-af2d8d66b6d1" alt="mAfi Logo" width="120" />
+</div>
+
   <h3>Find Your First Open Source Contribution</h3>
   <p>A modern platform to discover and track "good first issues" in open source projects.</p>
 </div>
