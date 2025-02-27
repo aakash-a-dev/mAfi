@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Star, Github } from 'lucide-react';
+import { Home, Star, Github, Code2 } from 'lucide-react';
 
 export default function Sidebar() {
   const location = useLocation();
@@ -34,6 +34,18 @@ export default function Sidebar() {
         >
           <Star className="w-5 h-5" />
           <span>Favorites</span>
+        </Link>
+
+        <Link
+          to="/gsoc"
+          className={`flex items-center space-x-3 p-3 rounded-lg transition-colors ${
+            location.pathname === '/gsoc'
+              ? 'bg-[#282828] text-white'
+              : 'text-gray-400 hover:text-white hover:bg-[#1a1a1a]'
+          }`}
+        >
+          <Code2 className="w-5 h-5" />
+          <span>GSoC & Outreachy</span>
         </Link>
       </nav>
     </div>
