@@ -6,6 +6,7 @@ import IssuesList from './components/IssuesList';
 import Favorites from './components/Favorites';
 import AnnouncementBar from './components/AnnouncementBar';
 import MobileNav from './components/MobileNav';
+import { GSoCSection } from './components/GSoCSection';
 import './index.css';
 
 // Google Analytics
@@ -47,6 +48,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<IssuesList filters={filters} />} />
                   <Route path="/favorites" element={<Favorites />} />
+                  <Route path="/gsoc" element={<GSoCSection />} />
                 </Routes>
               </div>
             </div>

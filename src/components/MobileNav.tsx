@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Star } from 'lucide-react';
+import { Home, Star, Code2 } from 'lucide-react';
 
 export default function MobileNav() {
   const location = useLocation();
@@ -25,6 +25,16 @@ export default function MobileNav() {
         >
           <Star className="w-6 h-6" />
           <span className="text-xs font-medium">Favorites</span>
+        </Link>
+
+        <Link
+          to="/gsoc"
+          className={`flex flex-col items-center space-y-1 transition-colors ${
+            location.pathname === '/gsoc' ? 'text-green-500' : 'text-gray-400 hover:text-white'
+          }`}
+        >
+          <Code2 className="w-6 h-6" />
+          <span className="text-xs font-medium">GSoC</span>
         </Link>
       </nav>
     </div>
