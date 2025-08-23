@@ -7,7 +7,7 @@ export default function AnnouncementBar() {
               <span role="img" aria-label="rocket" className="text-base">
                 🚀
               </span>
-              Welcome to the beta launch of mAfi!
+              We're building
             </span>
           </div>
         </div>
