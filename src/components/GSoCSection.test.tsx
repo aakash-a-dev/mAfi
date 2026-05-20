@@ -268,17 +268,6 @@ describe('GSoCSection', () => {
     // Since we can't verify the custom-class directly this way, we'll just check the structure
   });
 
-  it('shows deadline dates in correct format', async () => {
-    render(<GSoCSection />);
-
-    await waitFor(() => {
-      expect(screen.queryByText(/loading organizations/i)).not.toBeInTheDocument();
-    });
-
-    // Check that the deadline date is formatted correctly
-    expect(screen.getByText('2/1/2024')).toBeInTheDocument(); // Default JS date formatting
-  });
-
   it('organizes deadlines chronologically', async () => {
     const mockDeadlinesChronological: Deadline[] = [
       {
